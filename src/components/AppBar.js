@@ -1,25 +1,85 @@
-import React from 'react';
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import { List, ListItem } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import React from 'react'
+import {AppBar, Toolbar} from "@material-ui/core/";
+import {makeStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import MenuIcon from '@material-ui/icons/Menu';
+import {NavLink} from "react-router-dom";
+import {Hidden} from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import {Link} from 'react-router-dom';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
-const useStyles = makeStyles((theme) => ({
-  banner: {
-    backgroundColor: theme.palette.background.default
-  },
-  title: {
-    flexGrow: 1,
-  },
-  nav: {
-    display:`flex`,
-    color: theme.palette.text.default
-  },
-  linkText: {
-    color: theme.palette.text.default
-  }
+  const useStyles = makeStyles(theme => ({
+    root: {
+      marginBottom: '0'
+    },
+    appBar: {
+      borderBottom: `1px solid ${theme.palette.divider}`,
+      backgroundColor: theme.palette.background.default,
+      zIndex: theme.zIndex.drawer + 1,
+    },
+    toolbarDiv: {
+      flexGrow: 1,
+      marginRight: theme.spacing(3),
+      zIndex: 1400
+    },
+    toolbarTitle: {
+      '& *': {
+        margin: theme.spacing(1, 1.5),
+        textDecoration: 'none',
+        fontFamily: "Roboto",
+        fontStyle: "normal",
+        fontWeight: 300,
+        fontSize: "14px",
+        lineHeight: "16px",
+        alignItems: "center",
+        textAlign: "center",
+        color: theme.palette.text.primary,
+      },
+      [theme.breakpoints.down('xs')]: {
+        padding: theme.spacing(0),
+        color: theme.palette.text.primary,
+        '& *': {
+          padding: theme.spacing(0),
+          color: theme.palette.text.primary,
+          fontSize: "24px",
+        }
+      },
+    },
+    link: {
+      margin: theme.spacing(1, 1.5),
+    },
+    navButton: {
+      border: "1px solid #80CBC4",
+      borderRadius: "2px"
+    },
+    hamIcon: {
+  
+      color: theme.palette.primary.main
+    },
+    typography: {
+      // textAlign: 'left',
+      // padding: theme.spacing.unit * 2
+    },
+    activeStyle: {},
+    menu: {
+      // color: theme.palette.secondary.main,
+  
+      backgroundColor: theme.palette.background.default,
+  
+      "& *": {
+        color: theme.palette.text.secondary,
+        fontStyle: "bold",
+        fontWeight: "bold"
+        // opacity: 0.25,
+      }
+    },
+    menuItem: {
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.text.secondary,
+    }
   }));
 
   const navLinks = [
@@ -32,25 +92,74 @@ const useStyles = makeStyles((theme) => ({
 
   export default function AppHeader() {
     const classes = useStyles();
+    const activeStyle = {
+      fontWeight: "bold",
+    };
+  
+    const [anchorEl, setAnchorEl] = React.useState(null);
+  
+    const handleClick = event => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
     return (
-      <AppBar position="fixed" className={classes.banner}>
-        <Toolbar>
+      <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar>
+        <div className={classes.toolbarDiv}>
+          <Grid container direction="row" justify="flex-end" alignItems="center">
+            <Grid item>
 
-        </Toolbar>
-      </AppBar>
+              <nav className={classes.toolbarTitle}>
+                <Hidden xsDown>
+                  <NavLink exact to="/about" activeStyle={activeStyle}>
+                    01. About
+                  </NavLink>
+                  <NavLink to="/experience" activeStyle={activeStyle}>
+                    02. Experience
+                  </NavLink>
+                  <NavLink to="/work" activeStyle={activeStyle}>
+                    03. Work
+                  </NavLink>
+                  <NavLink to="/journey" activeStyle={activeStyle}>
+                    04. Journey
+                  </NavLink>
+                  <Button variant="outlined" className={classes.navButton} href={'data.resumeUrl'} target="_blank">
+                    Resume
+                  </Button>
+                </Hidden>
+                <Hidden only={['sm', 'md', 'lg', 'xl']}>
+                  <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}
+                          className={classes.hamIcon}>
+                    <MenuIcon/>
+                  </Button>
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    className={classes.menu}
+                  >
+                    <MenuItem onClick={handleClose} className={classes.menuItem} component={Link} to="/">Home</MenuItem>
+                    <MenuItem onClick={handleClose} className={classes.menuItem} component={Link} to="/about">About</MenuItem>
+                    <MenuItem onClick={handleClose} className={classes.menuItem} component={Link} to="/experience">Experience</MenuItem>
+                    <MenuItem onClick={handleClose} className={classes.menuItem} component={Link} to="/work">Work</MenuItem>
+                    <MenuItem onClick={handleClose} className={classes.menuItem} component={Link} to="/journey">Journey</MenuItem>
+                    <MenuItem onClick={handleClose} className={classes.menuItem} component="a" href={'data.resumeUrl'}>Resume</MenuItem>
+                  </Menu>
+                </Hidden>
+              </nav>
+
+            </Grid>
+          </Grid>
+          {/* <Button href="#" variant="outlined">
+            Login
+        </Button> */}
+        </div>
+      </Toolbar>
+    </AppBar>
     )
   };
-
-
-//   <Typography variant="h6" className={classes.title}>
-//   LM
-// </Typography>
-// <List component="nav" className={classes.nav} aria-label="links">
-// {navLinks.map(({ title, path }) => (
-//     <a href={path} key={title} className={classes.linkText}>
-//       <ListItem button>
-//         <Typography>{title}</Typography>
-//       </ListItem>
-//     </a>
-// ))}
-// </List>
