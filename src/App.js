@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { makeStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from '@material-ui/core/styles';
+import { BrowserRouter } from  "react-router-dom";
+import theme from './theme';
+import AppHeader from './components/AppBar';
+import AppDrawer from './components/Drawer';
+import About from './components/About';
+
+import {
+  Switch,
+  Route,
+} from "react-router-dom";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex'
+  }
+}));
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <Fragment className={classes.root}>
+          <AppHeader />
+          {/* <AppDrawer />       
+          <Switch>
+          <Route path="/about" component={About}/>
+          </Switch> */}
+        </Fragment>
+      </ThemeProvider>
+
+    </BrowserRouter>
   );
 }
 
