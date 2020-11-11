@@ -27,8 +27,8 @@ function App() {
       <CssBaseline />
         <Fragment className={classes.root}>
           <AppHeader />
-          {/* <AppDrawer />       
-          <Switch>
+          <AppDrawer />       
+          {/* <Switch>
           <Route path="/about" component={About}/>
           </Switch> */}
         </Fragment>
