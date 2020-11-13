@@ -6,6 +6,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {NavLink} from "react-router-dom";
 import {Hidden} from "@material-ui/core";
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import {Link} from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,10 +21,15 @@ import MenuItem from '@material-ui/core/MenuItem';
       backgroundColor: theme.palette.background.default,
       zIndex: theme.zIndex.drawer + 1,
     },
+    gravatar: {
+      width: '50px',
+      height: '50px'
+    },
     toolbarDiv: {
       flexGrow: 1,
       marginRight: theme.spacing(3),
-      zIndex: 1400
+      zIndex: 1400,
+      alignItems:'center'
     },
     toolbarTitle: {
       '& *': {
@@ -109,7 +115,9 @@ import MenuItem from '@material-ui/core/MenuItem';
       <AppBar position="fixed" className={classes.appBar}>
       <Toolbar>
         <div className={classes.toolbarDiv}>
-          <Grid container direction="row" justify="flex-end" alignItems="center">
+          <Grid container direction="row" justify="space-between" alignItems="center">
+          <Button href={"/"}><Avatar src="https://avatars0.githubusercontent.com/u/19326718?s=460&u=53bc6616529bcb71808afa77bfce1ff05adfc351&v=4"
+                                   className={classes.gravatar}/></Button>
             <Grid item>
 
               <nav className={classes.toolbarTitle}>

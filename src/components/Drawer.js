@@ -87,9 +87,9 @@ function AppDrawer(props) {
         justify="center"
         style={{minHeight: '90vh'}}>
 
-        <Button href={"/"}><Avatar src="https://avatars0.githubusercontent.com/u/19326718?s=460&u=53bc6616529bcb71808afa77bfce1ff05adfc351&v=4"
+        {/* <Button href={"/"}><Avatar src="https://avatars0.githubusercontent.com/u/19326718?s=460&u=53bc6616529bcb71808afa77bfce1ff05adfc351&v=4"
                                    className={classes.gravatar}/></Button>
-        <Divider/>
+        <Divider/> */}
 
         <List className={classes.drawerList}>
           {data["drawerButtons"].map((drawerBtn, index) => (
