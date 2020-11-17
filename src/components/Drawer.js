@@ -1,6 +1,7 @@
 import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import {List, makeStyles} from "@material-ui/core";
+import {Hidden} from "@material-ui/core";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import Grid from '@material-ui/core/Grid';
@@ -72,7 +73,8 @@ function AppDrawer(props) {
 
   const classes = useStyles();
   return (
-    <Drawer
+    <Hidden xsDown>
+        <Drawer
       variant="permanent"
       className={classes.drawer}
       classes={{
@@ -114,6 +116,7 @@ function AppDrawer(props) {
         <div>Designed &<br/> Built with ❤️ <br/>by <br/>Nimit</div>
       </a></footer> */}
     </Drawer>
+    </Hidden>
   );
 }
 
