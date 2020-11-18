@@ -146,9 +146,11 @@ import MenuItem from '@material-ui/core/MenuItem';
                   <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
-                    keepMounted
+                    getContentAnchorEl={null}
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                    transformOrigin={{ vertical: "top", horizontal: "center" }}
                     className={classes.menu}
                   >
                     <MenuItem onClick={handleClose} className={classes.menuItem} component={Link} to="/">Home</MenuItem>
